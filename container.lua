@@ -1,7 +1,7 @@
 module( ..., package.seeall )
 
 local container = {}
-container.new = function ()
+container.new = function (color)
 	
 	local container = {
 		label = display.newText("0", 30, display.contentHeight - 60, native.systemFont, 26);
