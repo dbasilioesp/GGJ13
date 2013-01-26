@@ -11,14 +11,14 @@ rato.new = function( direcao)
 		local RatoVermelhoHorizontal = graphics.newImageSheet("RatoVermelhoHorizontal.png", options);
 
         local dadosSequencia = {
-                {name="RatoVermelhoHorizontal", sheet=RatoVermelhoHorizontal, start=1, count=2, time=990, loopCount=0 },
+                {name="walk", sheet=WalkMouse, start=1, count=2, time=990, loopCount=0 },
         }
 
         local rat =  display.newSprite(RatoVermelhoHorizontal, dadosSequencia);
         rat.x = 0
         rat.y = 0
         rat:scale(0.5, 0.5)
-        rat:setSequence("RatoVermelhoHorizontal")
+        rat:setSequence("walk")
         rat:play()
 
         physics.addBody(rat, "dynamic", {density=3.0, friction=0.5,  bounce=0.3})

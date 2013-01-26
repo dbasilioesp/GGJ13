@@ -2,104 +2,114 @@ require "sprite"
 local physics = require "physics"
 local rato = require "rato"
 local container = require "container"
+local bar = require "bar"
+local wheel = require "wheel"
 
 system.activate( "multitouch" )
+physics.start()
+physics.setDrawMode("normal")
+physics.setGravity(0, 0)
 
 local loadmainmenu = {}
 loadmainmenu.new = function( params )
 
 	local localGroup = display.newGroup()
 	local rat
+	local rat_blue
+	local rat_red
 	local background
-	local new_rat
-	local rodaB
-	local containerB
-	local barraB
+	local wheel_red
+	local wheel_blue
+	local container_red
+	local barra_red
+	local barra_blue
 	local heart
 
-	local function moveUp (event)
-		new_rat.y = new_rat.y - 5
-		if new_rat.y < 0 - new_rat.height/2 then
-			Runtime:removeEventListener("enterFrame", moveUp)
-		end
-	end
-
-	local loadphase = function()
-
-		physics.start()
-		physics.setDrawMode("normal")
-		physics.setGravity(0, 0)
+	local initVars = function()
 
 		background = display.newImage("Cena1.png", true);
 		background:setReferencePoint(display.TopLeftReferencePoint)
 		background.x = 0
 		background.y = 0
 
-		barraB = {
-			label = display.newText("0", 30, 460, native.systemFont, 26);
-			current_value = 0;
-			limit_value = 100;
-			multiplier = 0;
-			charging = false
-		}
+		rat = display.newCircle(400, 380, 20)
+		rat.cor = "VERMELHO"
+		physics.addBody(rat, "dynamic", {density=3.0, friction=0.5,  bounce=0.3})
 
-		barraB.changeLabel = function ()
+		rat_blue = display.newCircle(600, 380, 20)
+		rat_blue.cor = "AZUL"
+		physics.addBody(rat_blue, "dynamic", {density=3.0, friction=0.5,  bounce=0.3})
 
-			if barraB.current_value <= barraB.limit_value then
-				barraB.label.text = "" .. barraB.current_value	
-			end
+		rat_red = display.newCircle(1200, 380, 20)
+		rat_red.cor = "VERMELHO"
+		physics.addBody(rat_red, "dynamic", {density=3.0, friction=0.5,  bounce=0.3})
 
+		local function moveRat(event)
+			rat.x = rat.x - 20
+			rat_blue.x = rat_blue.x - 20
+			rat_red.x = rat_red.x - 20
 		end
+		timer.performWithDelay(100, moveRat, 0)
 
-		rodaB = display.newCircle(35, 370, 60)
+		container_red = container.new()
+		container_blue = container.new()
+		container_blue.label.x = container_blue.label.x + 60
+		barra_red = bar.new("VERMELHO")
+		barra_blue = bar.new("AZUL")
+		wheel_red = wheel.new(barra_red, container_red)
+		wheel_blue = wheel.new(barra_blue, container_blue)
 
-		local function upBarraB( event )
-			barraB.current_value = barraB.current_value + 1
-			barraB.changeLabel()
-		end
+		localGroup:insert(background)
+		localGroup:insert(wheel_red)
+		localGroup:insert(wheel_blue)
+		localGroup:insert(container_red.label)
+		localGroup:insert(container_blue.label)
+		localGroup:insert(barra_red.label)
+		localGroup:insert(barra_blue.label)
+		localGroup:insert(rat)
+    end
 
-		local function onTouchRodaB(event)
+    initVars()
 
-			if event.phase == "began" and not barraB.charging then
-				barraB.timer = timer.performWithDelay( 100, upBarraB, 0)
-				barraB.charging = true
-			elseif event.phase == "began" and barraB.charging then
-				containerB.charge(barraB.current_value)
-				barraB.current_value = 0
-				barraB.changeLabel()
-			end
+    local loadphase = function()
 
-        end
-     
-     	rodaB:addEventListener("touch", onTouchRodaB)
+		barra_blue.label.x = display.contentWidth - 30
+		barra_blue.label.y = display.contentHeight - 190
+
+		wheel_red.x = 35
+		wheel_red.y = 370
+
+		wheel_blue.x = display.contentWidth - wheel_blue.width/3
+		wheel_blue.y = display.contentHeight - 280
 
      	heart = {
      		image = display.newCircle(display.contentWidth - 80, display.contentHeight - 80, 60);
      	}
 
-     	heart.takePulse = function (containerB)
-     		
-     		local multiplier = 1
-     		local chance = containerB.current_value
+     	heart.takePulse = function (container_red, container_blue)
+
+     		local multiplier = 2
+     		local chance = container_red.current_value + container_blue.current_value
 
      		if math.random(multiplier * 100) < chance then
      			return true
      		else
      			return false
      		end
-
      	end
 
      	local function onTapHeart( event )
 
-     		if heart.takePulse(containerB) then
+     		if heart.takePulse(container_red, container_blue) then
      			print("YEAY")
      		else
      			print("HOUK")
      		end
 
-     		containerB.current_value = 0
-     		containerB.changeLabel()
+     		container_red.current_value = 0
+     		container_blue.current_value = 0
+     		container_red.changeLabel()
+     		container_blue.changeLabel()
 
      	end
 
@@ -108,28 +118,6 @@ loadmainmenu.new = function( params )
 	end
 
 	loadphase()
-
-	
-
-	local initVars = function()
-
-		new_rat = rato.new()
-		new_rat.x = 500
-		new_rat.y = 700
-
-		new_rat.direcao = 1
-		Runtime:addEventListener("enterFrame" , moveUp)
-
-		containerB = container.new()
-
-		localGroup:insert(background)
-		localGroup:insert(new_rat)
-		localGroup:insert(rodaB)
-		localGroup:insert(containerB.label)
-		localGroup:insert(barraB.label)
-    end
-
-    initVars()
 
 	return localGroup
 end

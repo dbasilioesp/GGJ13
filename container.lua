@@ -3,10 +3,10 @@ module( ..., package.seeall )
 local container = {}
 container.new = function ()
 	
-	container = {
+	local container = {
 		label = display.newText("0", 30, display.contentHeight - 60, native.systemFont, 26);
 		current_value = 0;
-		limit_value = 50
+		limit_value = 50;
 	}
 	
 	container.changeLabel = function ()
