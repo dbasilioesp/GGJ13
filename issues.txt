@@ -1,0 +1,9 @@
+-------------------------
+
+-- Criar mapa com barreiras na fase 1 - Yuri
+-- Colocar os ratos nas rotas
+-- Criar sistema de pulsação dos elementos que os ratos carregam
+
+---------------
+
+-- Ajustar os ratos ao entrar em uma nova rota
