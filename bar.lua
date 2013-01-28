@@ -38,7 +38,7 @@ bar.new = function (mytype)
 
 	mybar.changeColor(mytype)
 
-	mybar.charge = function ( value )
+	mybar.charge = function ( value, wheel )
 
 		mybar.current_value = mybar.current_value + (value * mybar.factor)
 		
@@ -49,10 +49,11 @@ bar.new = function (mytype)
 		if mybar.current_value < 0 then
 			mybar.current_value = 0
 			if mybar.last_color ~= mybar.mytype then
-				
+
 				mybar.mytype = mybar.last_color
 				mybar.changeColor(mybar.last_color)
 				mybar.factor = mybar.factor * -1
+				wheel.changeColor(mybar.last_color)
 			end
 		end
 
