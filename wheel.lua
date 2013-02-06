@@ -6,15 +6,15 @@ wheel.new = function (bar)
 	local options = { width=240, height=240, numFrames=2, sheetContentWidth=480, sheetContentHeight=240 };
 	local options_rodavazia = {width=240, height=240, numFrames=1, sheetContentWidth=240, sheetContentHeight=240}
 
-	local rodavaziaAmarela = graphics.newImageSheet("wheelAnimacao/RodavaziaAmarelo1.png", options_rodavazia);
-	local rodavaziaVerde = graphics.newImageSheet("wheelAnimacao/RodavaziaVerde1.png", options_rodavazia);
-	local rodavaziaVermelha = graphics.newImageSheet("wheelAnimacao/RodavaziaVermelha1.png", options_rodavazia);
-	local rodavaziaAzul = graphics.newImageSheet("wheelAnimacao/RodavaziaAzul1.png", options_rodavazia);
+	local rodavaziaAmarela = graphics.newImageSheet("asserts/wheels/RodavaziaAmarelo1.png", options_rodavazia);
+	local rodavaziaVerde = graphics.newImageSheet("asserts/wheels/RodavaziaVerde1.png", options_rodavazia);
+	local rodavaziaVermelha = graphics.newImageSheet("asserts/wheels/RodavaziaVermelha1.png", options_rodavazia);
+	local rodavaziaAzul = graphics.newImageSheet("asserts/wheels/RodavaziaAzul1.png", options_rodavazia);
 
-	local rodaAmarela = graphics.newImageSheet("wheelAnimacao/RodaAmarela.png", options);
-	local rodaAzul = graphics.newImageSheet("wheelAnimacao/RodaAzul.png", options);
-	local rodaVerde = graphics.newImageSheet("wheelAnimacao/RodaVerde.png", options);	
-	local rodaVermelha = graphics.newImageSheet("wheelAnimacao/RodaVermelha.png", options);	
+	local rodaAmarela = graphics.newImageSheet("asserts/wheels/RodaAmarela.png", options);
+	local rodaAzul = graphics.newImageSheet("asserts/wheels/RodaAzul.png", options);
+	local rodaVerde = graphics.newImageSheet("asserts/wheels/RodaVerde.png", options);	
+	local rodaVermelha = graphics.newImageSheet("asserts/wheels/RodaVermelha.png", options);	
 
 
     local dadosSequencia = {

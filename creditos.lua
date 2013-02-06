@@ -7,7 +7,7 @@ cred.new = function ( params )
 
 	local loadphase = function()
 		
-		local volta = display.newImage("Intro&Menu/CoracaoIcone.png", true)
+		local volta = display.newImage("asserts/intro_menu/CoracaoIcone.png", true)
 		volta.x = 950
 		volta.y = 630
 
@@ -21,7 +21,7 @@ cred.new = function ( params )
 
 		volta:addEventListener("touch", onPlayTouch)
 
-		local creditos_image = display.newImage("creditos.png")
+		local creditos_image = display.newImage("asserts/creditos.png")
 		creditos_image.x = display.contentWidth/2
 		creditos_image.y = display.contentHeight/2
 	end

@@ -38,7 +38,7 @@ pause.new = function(clock_timer)
 				shade.alpha = 0.5
 
 				if not pauseBanner then
-					pauseBanner = display.newImage("PauseBandeiras.png", 0, 0)
+					pauseBanner = display.newImage("asserts/PauseBandeiras.png", 0, 0)
 					pauseBanner:scale(0.5, 0.5)
 					pauseBanner.x = display.contentWidth/2
 					pauseBanner.y = display.contentHeight/2
@@ -82,10 +82,10 @@ pause.new = function(clock_timer)
 	end
 	
 	pauseBtn = ui.newButton{
-		defaultSrc = "PauseIcone.png",
+		defaultSrc = "asserts/PauseIcone.png",
 		defaultX = 60,
 		defaultY = 60,
-		overSrc = "PauseIcone.png",
+		overSrc = "asserts/PauseIcone.png",
 		overX = 60,
 		overY = 60,
 		onEvent = onPauseTouch,
@@ -102,10 +102,10 @@ pause.new = function(clock_timer)
 	pauseBtn.isActive = true
 
 	resumeBtn = ui.newButton{
-		defaultSrc = "PlayIcone.png",
+		defaultSrc = "asserts/PlayIcone.png",
 		defaultX = 60,
 		defaultY = 60,
-		overSrc = "PlayIcone.png",
+		overSrc = "asserts/PlayIcone.png",
 		overX = 60,
 		overY = 60,
 		onEvent = onPauseTouch,

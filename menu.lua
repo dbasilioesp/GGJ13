@@ -14,10 +14,10 @@ menu.new = function (params)
 		physics.setDrawMode("normal")
 		physics.setGravity(0,0)
 
-		local musica = audio.loadSound("intro.ogg")
+		local musica = audio.loadSound("asserts/sounds/intro.ogg")
 		local mus = audio.play(musica, {loops = -1})
 
-		local img = display.newImage("Intro&Menu/Logo&Menu2.png", true)
+		local img = display.newImage("asserts/intro_menu/Logo&Menu2.png", true)
 		img:setReferencePoint(display.TopLeftReferencePoint)
 		img.x = 0
 		img.y = 0
@@ -28,15 +28,15 @@ menu.new = function (params)
 			play.alpha = 1.0
 			physics.addBody( play , { friction = 1.0 , isSensor = true } )
 
-		local cred = display.newRect(500,430,345,75)
-			cred.myName = "cred"
-			cred.alpha = 1.0
-			physics.addBody( cred , { friction = 1.0 , isSensor = true } )
-
-		local opts = display.newRect(640,530,345,75)
+		local opts = display.newRect(500,430,345,75)
 			opts.myName = "opts"
 			opts.alpha = 1.0
 			physics.addBody( opts , { friction = 1.0 , isSensor = true } )
+
+		local cred = display.newRect(640,530,345,75)
+			cred.myName = "cred"
+			cred.alpha = 1.0
+			physics.addBody( cred , { friction = 1.0 , isSensor = true } )
 
 		local exit = display.newRect(720,620,345,75)
 			exit.myName = "exit"
@@ -52,11 +52,11 @@ menu.new = function (params)
 			end
 
 			if event.phase == "ended" and event.target.myName == "opts" then
-				director:changeScene( "creditos", "crossfade" )
+				director:changeScene( "opts", "crossfade" )
 			end
 
 			if event.phase == "ended" and event.target.myName == "cred" then				
-				director:changeScene( "opts", "crossfade" )
+				director:changeScene( "creditos", "crossfade" )
 			end
 
 			if event.phase == "ended" and event.target.myName == "exit" then				
