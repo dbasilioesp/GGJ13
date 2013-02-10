@@ -35,16 +35,16 @@ _rat.new = function( direcao, cor)
 
         local rat
 
-        if cor == "AZUL" then
+        if cor == "BLUE" then
                 rat = display.newSprite(RatoAzulVertical, dadosSequencia);
         end
-        if cor == "VERMELHO" then
+        if cor == "RED" then
                 rat = display.newSprite(RatoVermelhoVertical, dadosSequencia);
         end
-        if cor == "VERDE" then
+        if cor == "GREEN" then
                 rat = display.newSprite(RatoVerdeVertical, dadosSequencia);
         end
-        if cor == "AMARELO" then
+        if cor == "YELLOW" then
                 rat = display.newSprite(RatoAmareloVertical, dadosSequencia);
         end
 
@@ -158,22 +158,22 @@ _rat.new = function( direcao, cor)
                 local ratoVertical
                 local ratoHorizontal
 
-                if rat.cor == "AZUL" then
+                if rat.cor == "BLUE" then
                         ratoVertical = "RatoAzulVertical"
                         ratoHorizontalEsquerda = "RatoAzulHorizontalEsquerda"
                         ratoHorizontal = "RatoAzulHorizontal"
                 end
-                if rat.cor == "VERMELHO" then
+                if rat.cor == "RED" then
                         ratoVertical = "RatoVermelhoVertical"
                         ratoHorizontalEsquerda = "RatoVermelhoHorizontalEsquerda"
                         ratoHorizontal = "RatoVermelhoHorizontal"
                 end
-                if rat.cor == "VERDE" then
+                if rat.cor == "GREEN" then
                         ratoVertical = "RatoVerdeVertical"
                         ratoHorizontal = "RatoVerdeHorizontal"
                         ratoHorizontalEsquerda = "RatoVerdeHorizontalEsquerda"
                 end
-                if rat.cor == "AMARELO" then
+                if rat.cor == "YELLOW" then
                         ratoVertical = "RatoAmareloVertical"
                         ratoHorizontalEsquerda = "RatoAmareloHorizontalEsquerda"
                         ratoHorizontal = "RatoAmareloHorizontal"

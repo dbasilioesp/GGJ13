@@ -20,16 +20,16 @@ bar.new = function (mytype)
 
 	mybar.changeColor = function (color)
 
-		if color == "AZUL" then
+		if color == "BLUE" then
 			-- Color Blue
 			mybar.label:setTextColor(0,0,255,255)
-		elseif color == "VERMELHO" then
+		elseif color == "RED" then
 			-- Color Red
 			mybar.label:setTextColor(255,0,0,255)
-		elseif color == "AMARELO" then
+		elseif color == "YELLOW" then
 			-- Color Yellow
 			mybar.label:setTextColor(255,255,0,255)
-		elseif color == "VERDE" then
+		elseif color == "GREEN" then
 			-- Color Green
 			mybar.label:setTextColor(0,255,0,255)
 		end

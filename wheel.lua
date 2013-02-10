@@ -31,16 +31,16 @@ wheel.new = function (bar)
 	}
 	local mywheel
 	
-	if bar.mytype == "AZUL" then
+	if bar.mytype == "BLUE" then
 		mywheel = display.newSprite(rodaAzul, dadosSequencia)
 	
-	elseif bar.mytype == "VERMELHO" then
+	elseif bar.mytype == "RED" then
 		mywheel = display.newSprite(rodaVermelha, dadosSequencia)
 	
-	elseif bar.mytype == "AMARELO" then
+	elseif bar.mytype == "YELLOW" then
 		mywheel = display.newSprite(rodaAmarela, dadosSequencia)
 	
-	elseif bar.mytype == "VERDE" then
+	elseif bar.mytype == "GREEN" then
 		mywheel = display.newSprite(rodaVerde, dadosSequencia)
 	end
 
@@ -58,13 +58,13 @@ wheel.new = function (bar)
 	end
 
 	mywheel.changeColor = function(color)
-		if color == "AZUL" then
+		if color == "BLUE" then
 			mywheel:setSequence("rodaAzul")	
-		elseif color == "VERMELHO" then
+		elseif color == "RED" then
 			mywheel:setSequence("rodaVermelha")
-		elseif color == "AMARELO" then
+		elseif color == "YELLOW" then
 			mywheel:setSequence("rodaAmarela")
-		elseif color == "VERDE" then
+		elseif color == "GREEN" then
 			mywheel:setSequence("rodaVerde")
 		end
 

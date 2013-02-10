@@ -1,5 +1,4 @@
-require "sprite"
-local physics = require "physics"
+
 local rat = require "rat"
 local container = require "container"
 local bar = require "bar"
