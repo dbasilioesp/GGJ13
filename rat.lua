@@ -83,6 +83,7 @@ _rat.new = function( direcao, cor)
                         rat.pass = 0
                         
                 end
+                
             end
         end
 
