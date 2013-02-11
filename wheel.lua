@@ -58,8 +58,11 @@ wheel.new = function (bar)
 	end
 
 	mywheel.changeColor = function(color)
+
+		print("here ??")
+
 		if color == "BLUE" then
-			mywheel:setSequence("rodaAzul")	
+			mywheel:setSequence("rodaAzul")
 		elseif color == "RED" then
 			mywheel:setSequence("rodaVermelha")
 		elseif color == "YELLOW" then
@@ -103,7 +106,6 @@ wheel.new = function (bar)
         		bar.timer = timer.performWithDelay( 1000, upBar, 0)
         	end
 
-        	--Runtime:removeEventListener("enterFrame", rat.moveLeft)
         	rat.stopMove()
 
         	rat:removeSelf()

@@ -5,7 +5,7 @@ local physics = require "physics"
 local container = require "container"
 local bar = require "bar"
 local wheel = require "wheel"
-local rat = require "rat"
+local rat = require "rat2"
 system.activate("multitouch")
 
 physics.start()
@@ -27,6 +27,7 @@ local wheel_blue
 local wheel_yellow
 local wheel_green
 local heart
+local rats_timer
 
 local scene2 = {}
 scene2.new = function ( params )
@@ -58,6 +59,13 @@ scene2.new = function ( params )
 	localGroup:insert(bar_yellow.label)
 	localGroup:insert(bar_green.label)
 
+	localGroup:insert(wheel_red)
+	localGroup:insert(wheel_blue)
+	localGroup:insert(wheel_green)
+	localGroup:insert(wheel_yellow)
+
+	localGroup:insert(heart)
+
 	-- RATS
 	scene2.createRats()
 
@@ -70,12 +78,6 @@ scene2.createBackground = function()
 	background = display.newImage("asserts/maps/cena1.png", true)
 	background:setReferencePoint(display.TopLeftReferencePoint)
 	background.x = 0; background.y = 0
-
-	local function changeScene3()
-		director:changeScene("scene3")
-	end
-
-	background:addEventListener("tap", changeScene3)
 end
 
 scene2.createContainers = function()
@@ -191,15 +193,20 @@ scene2.createRats = function()
 		ratcolor = "BLUE"
 	end
 
-	local new_rat = rat.new(1, ratcolor)
+	local new_rat = rat.new(ratcolor)
 	new_rat.x = math.random(420,600)
 	new_rat.y = math.random(700,950)
 
 	new_rat:play()
 
 	localGroup:insert(new_rat)
-	timer.performWithDelay(1500, scene2.createRats)
+	rats_timer = timer.performWithDelay(1500, scene2.createRats)
 
+end
+
+scene2.stopCreateRats = function()
+	print ("Timer Stop")
+	timer.pause(rats_timer)
 end
 
 scene2.getContainer =  function (color)
@@ -232,7 +239,8 @@ scene2.nextGameScreen = function()
 end
 
 scene2.gameOverScreen = function()
-	print ("Lose")
+	scene2.stopCreateRats()
+	director:changeScene("scene3")
 end
 
 scene2.clean = function (event)

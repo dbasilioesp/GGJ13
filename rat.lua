@@ -229,9 +229,6 @@ _rat.new = function( direcao, cor)
                 end
         end
 
-
-
-         
         local function swipe(event)
                 if event.phase == "began" then
                         beginX = event.x
