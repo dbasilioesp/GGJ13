@@ -5,12 +5,8 @@ local _rat = {}
 local rat
 local options
 
-physics.start()
-physics.setDrawMode("normal")
-physics.setGravity(0, 0)
-
 _rat.new = function(color, direction)
-    
+
     options = { width=200, height=100, numFrames=2, sheetContentWidth=400, sheetContentHeight=100 };
     
     if color == "RED" then
@@ -42,6 +38,13 @@ _rat.new = function(color, direction)
 
     physics.addBody(rat, "dinamic", {density=3.0, friction=0.5,  bounce=0.3, shape=ratShape})
 
+    rat.stopMove = function ()
+        Runtime:removeEventListener("enterFrame", _rat.moveUp)
+        Runtime:removeEventListener("enterFrame", _rat.moveDown)
+        Runtime:removeEventListener("enterFrame", _rat.moveLeft)
+        Runtime:removeEventListener("enterFrame", _rat.moveRight)
+    end
+
     if direction == "UP" then -- para CIMA
         rat:setSequence("rat_up")
         Runtime:addEventListener("enterFrame", _rat.moveUp)
@@ -57,13 +60,6 @@ _rat.new = function(color, direction)
     end
 
     rat:play()
-
-    rat.stopMove = function ()
-        Runtime:removeEventListener("enterFrame", _rat.moveUp)
-        Runtime:removeEventListener("enterFrame", _rat.moveDown)
-        Runtime:removeEventListener("enterFrame", _rat.moveLeft)
-        Runtime:removeEventListener("enterFrame", _rat.moveRight)
-    end
 
     return rat
 end
@@ -138,8 +134,8 @@ _rat.moveUp = function (event)
             return
         end
 
-        if rat.x <= 400 then
-
+        if rat.x <= 4400 then
+            print ("4400")
             Runtime:removeEventListener("enterFrame", _rat.moveUp)
             
             if rat.x > 185 and rat.x < 240 then
@@ -150,8 +146,8 @@ _rat.moveUp = function (event)
                 transition.to(rat, {time =900 ,x = rat.x - 26, y = 130 })
                 rat.pass = 0     
             end
-            
         end
+            
     end
 end
 

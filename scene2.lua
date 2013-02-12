@@ -5,7 +5,7 @@ local physics = require "physics"
 local container = require "container"
 local bar = require "bar"
 local wheel = require "wheel"
-local rat = require "rat2"
+local rat = require "rat3"
 system.activate("multitouch")
 
 physics.start()
@@ -27,6 +27,7 @@ local wheel_blue
 local wheel_yellow
 local wheel_green
 local heart
+local rats_table = {}
 local rats_timer
 
 local scene2 = {}
@@ -98,6 +99,7 @@ scene2.createContainers = function()
 end
 
 scene2.createBars = function()
+
 	bar_red = bar.new("RED")
 	bar_blue = bar.new("BLUE")
 	bar_yellow = bar.new("YELLOW")
@@ -194,12 +196,10 @@ scene2.createRats = function()
 	end
 
 	local new_rat = rat.new(ratcolor)
-	new_rat.x = math.random(420,600)
-	new_rat.y = math.random(700,950)
+	new_rat.sprite.x = math.random(420,600)
+	new_rat.sprite.y = math.random(700,950)
 
-	new_rat:play()
-
-	localGroup:insert(new_rat)
+	table.insert(rats_table, new_rat)
 	rats_timer = timer.performWithDelay(1500, scene2.createRats)
 
 end
@@ -244,6 +244,13 @@ scene2.gameOverScreen = function()
 end
 
 scene2.clean = function (event)
+	
+	for i,v in ipairs(rats_table) do
+		print (i, v)
+		v.stopMove()
+		v.removeRat()
+	end
+
 	container_red = nil
 	container_blue = nil
 	container_yellow = nil

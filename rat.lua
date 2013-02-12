@@ -2,7 +2,7 @@ module( ..., package.seeall )
 
 local _rat = {}
 _rat.new = function( direcao, cor)
-
+        
         local options =  { width=200, height=100, numFrames=2, sheetContentWidth=400, sheetContentHeight=100 };
         local RatoVermelhoVertical = graphics.newImageSheet("asserts/rats/RatoVermelhoVertical.png", options);
         local RatoVermelhoHorizontal = graphics.newImageSheet("asserts/rats/RatoVermelhoHorizontal.png", options);
@@ -36,16 +36,16 @@ _rat.new = function( direcao, cor)
         local rat
 
         if cor == "BLUE" then
-                rat = display.newSprite(RatoAzulVertical, dadosSequencia);
+            rat = display.newSprite(RatoAzulVertical, dadosSequencia);
         end
         if cor == "RED" then
-                rat = display.newSprite(RatoVermelhoVertical, dadosSequencia);
+            rat = display.newSprite(RatoVermelhoVertical, dadosSequencia);
         end
         if cor == "GREEN" then
-                rat = display.newSprite(RatoVerdeVertical, dadosSequencia);
+            rat = display.newSprite(RatoVerdeVertical, dadosSequencia);
         end
         if cor == "YELLOW" then
-                rat = display.newSprite(RatoAmareloVertical, dadosSequencia);
+            rat = display.newSprite(RatoAmareloVertical, dadosSequencia);
         end
 
         limite  = false
