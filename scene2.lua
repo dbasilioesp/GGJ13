@@ -4,7 +4,7 @@ local sprite = require "sprite"
 local physics = require "physics"
 local container = require "container"
 local bar = require "bar"
-local wheel = require "wheel"
+local wheel = require "wheel2"
 local rat = require "rat3"
 system.activate("multitouch")
 
@@ -60,10 +60,10 @@ scene2.new = function ( params )
 	localGroup:insert(bar_yellow.label)
 	localGroup:insert(bar_green.label)
 
-	localGroup:insert(wheel_red)
-	localGroup:insert(wheel_blue)
-	localGroup:insert(wheel_green)
-	localGroup:insert(wheel_yellow)
+	localGroup:insert(wheel_red.sprite)
+	localGroup:insert(wheel_blue.sprite)
+	localGroup:insert(wheel_green.sprite)
+	localGroup:insert(wheel_yellow.sprite)
 
 	localGroup:insert(heart)
 
@@ -123,29 +123,29 @@ scene2.createWheels = function()
 	wheel_yellow = wheel.new(bar_yellow)
 	wheel_green = wheel.new(bar_green)
 
-	wheel_red.x = 35
-	wheel_red:setSequence("rodavaziaVermelha")
-	wheel_red:scale(0.6,0.6)
-	wheel_red:play()
-	wheel_red.y = 370
+	wheel_red.sprite.x = 35
+	wheel_red.sprite:setSequence("wheelEmptyRed")
+	wheel_red.sprite:scale(0.6,0.6)
+	wheel_red.sprite:play()
+	wheel_red.sprite.y = 370
 
-	wheel_yellow.x = 175
-	wheel_yellow:setSequence("rodavaziaAmarela")
-	wheel_yellow:scale(0.6,0.6)
-	wheel_yellow:play()
-	wheel_yellow.y = 130
+	wheel_yellow.sprite.x = 175
+	wheel_yellow.sprite:setSequence("wheelEmptyYellow")
+	wheel_yellow.sprite:scale(0.6,0.6)
+	wheel_yellow.sprite:play()
+	wheel_yellow.sprite.y = 130
 
-	wheel_blue:setSequence("rodavaziaAzul")
-	wheel_blue:scale(0.6,0.6)
-	wheel_blue:play()
-	wheel_blue.x = display.contentWidth - 40
-	wheel_blue.y = display.contentHeight - 280
+	wheel_blue.sprite:setSequence("wheelEmptyBlue")
+	wheel_blue.sprite:scale(0.6,0.6)
+	wheel_blue.sprite:play()
+	wheel_blue.sprite.x = display.contentWidth - 40
+	wheel_blue.sprite.y = display.contentHeight - 280
 
-	wheel_green:setSequence("rodavaziaVerde")
-	wheel_green:scale(0.6,0.6)
-	wheel_green:play()
-	wheel_green.x = display.contentWidth - 50
-	wheel_green.y = 160
+	wheel_green.sprite:setSequence("wheelEmptyGreen")
+	wheel_green.sprite:scale(0.6,0.6)
+	wheel_green.sprite:play()
+	wheel_green.sprite.x = display.contentWidth - 50
+	wheel_green.sprite.y = 160
 
 	local function onToucnWheel (event)
 
@@ -158,10 +158,10 @@ scene2.createWheels = function()
 		end
 	end
 
-	wheel_red:addEventListener("touch", onToucnWheel)
-	wheel_blue:addEventListener("touch", onToucnWheel)
-	wheel_green:addEventListener("touch", onToucnWheel)
-	wheel_yellow:addEventListener("touch", onToucnWheel)
+	wheel_red.sprite:addEventListener("touch", onToucnWheel)
+	wheel_blue.sprite:addEventListener("touch", onToucnWheel)
+	wheel_green.sprite:addEventListener("touch", onToucnWheel)
+	wheel_yellow.sprite:addEventListener("touch", onToucnWheel)
 
 end
 
@@ -241,13 +241,17 @@ end
 scene2.gameOverScreen = function()
 	scene2.stopCreateRats()
 	director:changeScene("scene3")
+
 end
 
 scene2.clean = function (event)
 	
+	wheel_blue.sprite:removeEventListener('collision', wheel_blue.onPostCollision)
+	wheel_red.sprite:removeEventListener('collision', wheel_red.onPostCollision)
+	wheel_yellow.sprite:removeEventListener('collision', wheel_yellow.onPostCollision)
+	wheel_green.sprite:removeEventListener('collision', wheel_green.onPostCollision)
+
 	for i,v in ipairs(rats_table) do
-		print (i, v)
-		v.stopMove()
 		v.removeRat()
 	end
 
@@ -259,6 +263,10 @@ scene2.clean = function (event)
 	bar_blue = nil
 	bar_yellow = nil
 	bar_green = nil
+	wheel_blue = nil
+	wheel_red = nil
+	wheel_yellow = nil
+	wheel_green = nil
 end
 
 return scene2

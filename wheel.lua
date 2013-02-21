@@ -3,6 +3,8 @@ module( ..., package.seeall )
 local wheel = {}
 wheel.new = function (bar)
 	
+	local mywheel
+	
 	local options = { width=240, height=240, numFrames=2, sheetContentWidth=480, sheetContentHeight=240 };
 	local options_rodavazia = {width=240, height=240, numFrames=1, sheetContentWidth=240, sheetContentHeight=240}
 
@@ -29,7 +31,6 @@ wheel.new = function (bar)
            {name="rodavaziaVermelha", sheet=rodavaziaVermelha, start=1, count=1, time=300, loopCount=0 } 
 
 	}
-	local mywheel
 	
 	if bar.mytype == "BLUE" then
 		mywheel = display.newSprite(rodaAzul, dadosSequencia)
@@ -106,9 +107,8 @@ wheel.new = function (bar)
         		bar.timer = timer.performWithDelay( 1000, upBar, 0)
         	end
 
-        	rat.stopMove()
-
-        	rat:removeSelf()
+        	--Runtime:removeEventListener("enterFrame", rat)
+        	rat.removeSelf()
         	rat = nil
 
 	    elseif ( event.phase == "ended" ) then
@@ -116,7 +116,7 @@ wheel.new = function (bar)
 	    end
 	end
 
-	mywheel:addEventListener( "collision", onPostCollision )
+	mywheel:addEventListener("collision", onPostCollision)
 
 	return mywheel
 

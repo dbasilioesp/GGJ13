@@ -34,6 +34,7 @@ CRat.new = function(color, direction)
 	    rat.sprite.isFixedRotation = true
 	    rat.sprite.direction = direction
 	    rat.sprite.color = color
+	    rat.sprite.name = "rat class"
 
 	    rat.sprite.x = 200; rat.sprite.y = 200
 	    rat.sprite.pass = 0
@@ -239,12 +240,14 @@ CRat.new = function(color, direction)
 	end
 
 	rat.removeRat = function()
-	    Runtime:removeEventListener("enterFrame", rat.moveUp)
-	    Runtime:removeEventListener("enterFrame", rat.moveDown)
-	    Runtime:removeEventListener("enterFrame", rat.moveRight)
-	    rat.sprite:removeSelf()
-	    rat = nil
-	    print("rat removed")
+		if rat ~= nil then
+		    Runtime:removeEventListener("enterFrame", rat.moveUp)
+		    Runtime:removeEventListener("enterFrame", rat.moveDown)
+		    Runtime:removeEventListener("enterFrame", rat.moveRight)
+		    rat.sprite:removeSelf()
+		    rat = nil
+		    print("rat removed")
+		end
 	end
 
 	init()
