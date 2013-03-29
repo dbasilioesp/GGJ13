@@ -167,7 +167,7 @@ end
 
 scene2.createHeart = function()
 	
-	heart = display.newImage("asserts/IconCoracaoGame.png", display.contentWidth - 160, display.contentHeight - 175)
+	heart = display.newImage("asserts/ratov3.png", display.contentWidth - 160, display.contentHeight - 175)
 
 	local function onTapHeart( event )
 		if scene2.isWinner() then
