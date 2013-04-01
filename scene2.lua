@@ -26,9 +26,14 @@ local wheel_red
 local wheel_blue
 local wheel_yellow
 local wheel_green
-local heart
+local doctor
 local rats_table = {}
 local rats_timer
+local shade
+local game_time
+local clock_label
+local backmusic
+local channel
 
 local scene2 = {}
 scene2.new = function ( params )
@@ -47,8 +52,17 @@ scene2.new = function ( params )
 	-- WHEELS
 	scene2.createWheels()
 
-	-- HEART
-	scene2.createHeart()
+	-- RAT DOCTOR
+	scene2.createRatDoctor()
+
+	-- SHADE
+	scene2.createShade()
+
+	-- CLOCK
+	scene2.createClock()
+
+	-- MUSIC
+	--scene2.createBackMusic()
 	
 	localGroup:insert(background)
 	localGroup:insert(container_red.label)
@@ -65,8 +79,10 @@ scene2.new = function ( params )
 	localGroup:insert(wheel_green)
 	localGroup:insert(wheel_yellow)
 
-	localGroup:insert(heart)
-
+	localGroup:insert(doctor)
+	localGroup:insert(shade)
+	localGroup:insert(clock_label)
+	
 	-- RATS
 	scene2.createRats()
 
@@ -165,11 +181,11 @@ scene2.createWheels = function()
 
 end
 
-scene2.createHeart = function()
+scene2.createRatDoctor = function()
 	
-	heart = display.newImage("asserts/ratov3.png", display.contentWidth - 160, display.contentHeight - 175)
+	doctor = display.newImage("asserts/ratov3.png", display.contentWidth - 160, display.contentHeight - 175)
 
-	local function onTapHeart( event )
+	local function onTapDoctor( event )
 		if scene2.isWinner() then
 			scene2.nextGameScreen()
 		else
@@ -177,7 +193,7 @@ scene2.createHeart = function()
 		end
 	end
 
-	heart:addEventListener("tap", onTapHeart)
+	doctor:addEventListener("tap", onTapDoctor)
 
 end
 
@@ -209,6 +225,38 @@ scene2.stopCreateRats = function()
 	timer.pause(rats_timer)
 end
 
+scene2.createShade = function()
+	shade = display.newRect( 0, 0, display.contentWidth, display.contentHeight )
+	shade:setFillColor( 0, 0, 0, 255 )
+	shade.x = display.contentWidth/2; shade.y = display.contentHeight/2
+	shade.alpha = 0.5
+	shade.isVisible = false
+end
+
+scene2.createClock = function()
+	
+	game_time = 60
+	clock_label = display.newText("1:00", 450, 0, native.systemFont, game_time)
+		
+	local function decreaseTime()
+		if clock_label.text ~= "0:00" then
+			game_time = game_time - 1
+			clock_label.text = string.format("0:%02d", game_time)
+		else
+			scene2.gameOverScreen()
+		end
+	end
+
+	clock_time = timer.performWithDelay(1000, decreaseTime , 61)
+
+end
+
+scene2.createBackMusic = function()
+	backmusic = audio.loadSound("asserts/sounds/musica1.ogg")
+	channel = audio.play(backmusic, {loops = -1})
+	audio.setVolume(0.40)
+end
+
 scene2.getContainer =  function (color)
 			
 	if color == "RED" then
@@ -235,13 +283,50 @@ scene2.isWinner = function ()
 end
 
 scene2.nextGameScreen = function()
-	print ("Win")
+	
+	scene2.stopCreateRats()
+
+	--audio:pause(channel)
+	shade.isVisible = true
+	
+	local nextgame_image = display.newImage("asserts/NextBandeiras.png")
+	nextgame_image:scale(0.5, 0.5)
+	nextgame_image.x = display.contentWidth/2
+	nextgame_image.y = display.contentHeight/2
+	nextgame_image:toFront()
+
+	timer.pause(clock_time)
+	nextgame_image:addEventListener("touch", scene2.restartGame)
+
+	localGroup:insert(nextgame_image)
 end
 
 scene2.gameOverScreen = function()
+	
 	scene2.stopCreateRats()
-	director:changeScene("scene3")
 
+	physics.pause()
+
+	--audio:pause(channel)
+	shade.isVisible = true
+	
+	local gameover_image = display.newImage("asserts/GameOverBandeiras.png")
+	gameover_image:scale(0.5, 0.5)
+	gameover_image.x = display.contentWidth/2
+	gameover_image.y = display.contentHeight/2
+	gameover_image:toFront()
+
+	timer.pause(clock_time)
+	gameover_image:addEventListener("touch", scene2.restartGame)
+
+	localGroup:insert(gameover_image)
+
+end
+
+scene2.restartGame = function ()
+	audio.stop(channel)
+	scene2.clean()
+	director:changeScene("scene2")
 end
 
 scene2.clean = function (event)
@@ -267,6 +352,11 @@ scene2.clean = function (event)
 	wheel_red = nil
 	wheel_yellow = nil
 	wheel_green = nil
+
+	backmusic = nil
+	channel = nil
+
+
 end
 
 return scene2

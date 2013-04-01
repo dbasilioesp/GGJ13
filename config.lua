@@ -2,15 +2,15 @@ application =
 {
         content =
         {
-        		width = 768,
+        	width = 768,
                 height = 1024,
-                scale = "Landscape",
+                scale = "zoomStretch",
                 fps = 30,
-                antialias = true,
-                
-                imageSuffix =
-				{
-					["@2x"] = 2,
-				},
+                --antialias = true,
+                xAlign = "left",
+                yAlign = "top",
+                imageSuffix = {
+			["@2x"] = 2,
+		},
         },
 }

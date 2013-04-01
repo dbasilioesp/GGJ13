@@ -8,7 +8,7 @@ local main = function ()
 		
 	mainGroup:insert(director.directorView)
 	
-	director:changeScene("scene2")
+	director:changeScene("menu")
 	
 	return true
 end
