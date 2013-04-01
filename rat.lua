@@ -2,7 +2,7 @@ module( ..., package.seeall )
 
 local _rat = {}
 _rat.new = function( direcao, cor)
-
+        
         local options =  { width=200, height=100, numFrames=2, sheetContentWidth=400, sheetContentHeight=100 };
         local RatoVermelhoVertical = graphics.newImageSheet("asserts/rats/RatoVermelhoVertical.png", options);
         local RatoVermelhoHorizontal = graphics.newImageSheet("asserts/rats/RatoVermelhoHorizontal.png", options);
@@ -35,17 +35,17 @@ _rat.new = function( direcao, cor)
 
         local rat
 
-        if cor == "AZUL" then
-                rat = display.newSprite(RatoAzulVertical, dadosSequencia);
+        if cor == "BLUE" then
+            rat = display.newSprite(RatoAzulVertical, dadosSequencia);
         end
-        if cor == "VERMELHO" then
-                rat = display.newSprite(RatoVermelhoVertical, dadosSequencia);
+        if cor == "RED" then
+            rat = display.newSprite(RatoVermelhoVertical, dadosSequencia);
         end
-        if cor == "VERDE" then
-                rat = display.newSprite(RatoVerdeVertical, dadosSequencia);
+        if cor == "GREEN" then
+            rat = display.newSprite(RatoVerdeVertical, dadosSequencia);
         end
-        if cor == "AMARELO" then
-                rat = display.newSprite(RatoAmareloVertical, dadosSequencia);
+        if cor == "YELLOW" then
+            rat = display.newSprite(RatoAmareloVertical, dadosSequencia);
         end
 
         limite  = false
@@ -83,6 +83,7 @@ _rat.new = function( direcao, cor)
                         rat.pass = 0
                         
                 end
+                
             end
         end
 
@@ -157,22 +158,22 @@ _rat.new = function( direcao, cor)
                 local ratoVertical
                 local ratoHorizontal
 
-                if rat.cor == "AZUL" then
+                if rat.cor == "BLUE" then
                         ratoVertical = "RatoAzulVertical"
                         ratoHorizontalEsquerda = "RatoAzulHorizontalEsquerda"
                         ratoHorizontal = "RatoAzulHorizontal"
                 end
-                if rat.cor == "VERMELHO" then
+                if rat.cor == "RED" then
                         ratoVertical = "RatoVermelhoVertical"
                         ratoHorizontalEsquerda = "RatoVermelhoHorizontalEsquerda"
                         ratoHorizontal = "RatoVermelhoHorizontal"
                 end
-                if rat.cor == "VERDE" then
+                if rat.cor == "GREEN" then
                         ratoVertical = "RatoVerdeVertical"
                         ratoHorizontal = "RatoVerdeHorizontal"
                         ratoHorizontalEsquerda = "RatoVerdeHorizontalEsquerda"
                 end
-                if rat.cor == "AMARELO" then
+                if rat.cor == "YELLOW" then
                         ratoVertical = "RatoAmareloVertical"
                         ratoHorizontalEsquerda = "RatoAmareloHorizontalEsquerda"
                         ratoHorizontal = "RatoAmareloHorizontal"
@@ -202,8 +203,6 @@ _rat.new = function( direcao, cor)
                                 rat:setSequence(ratoHorizontalEsquerda)
                                 rat:play()
                                 Runtime:addEventListener("enterFrame" , rat.moveLeft)
-
-
                         else
                                 rat.direcao_rato = 4
                                 rat:setSequence(ratoHorizontal)
@@ -228,9 +227,6 @@ _rat.new = function( direcao, cor)
                 end
         end
 
-
-
-         
         local function swipe(event)
                 if event.phase == "began" then
                         beginX = event.x

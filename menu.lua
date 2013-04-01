@@ -66,7 +66,7 @@ menu.new = function (params)
 		end
 	
 		play:addEventListener("touch", onPlayTouch)
-		opts:addEventListener("touch", onPlayTouch)
+		--opts:addEventListener("touch", onPlayTouch)
 		cred:addEventListener("touch", onPlayTouch)
 		exit:addEventListener("touch", onPlayTouch)
 

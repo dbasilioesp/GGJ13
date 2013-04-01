@@ -3,6 +3,8 @@ module( ..., package.seeall )
 local wheel = {}
 wheel.new = function (bar)
 	
+	local mywheel
+	
 	local options = { width=240, height=240, numFrames=2, sheetContentWidth=480, sheetContentHeight=240 };
 	local options_rodavazia = {width=240, height=240, numFrames=1, sheetContentWidth=240, sheetContentHeight=240}
 
@@ -13,9 +15,8 @@ wheel.new = function (bar)
 
 	local rodaAmarela = graphics.newImageSheet("asserts/wheels/RodaAmarela.png", options);
 	local rodaAzul = graphics.newImageSheet("asserts/wheels/RodaAzul.png", options);
-	local rodaVerde = graphics.newImageSheet("asserts/wheels/RodaVerde.png", options);	
-	local rodaVermelha = graphics.newImageSheet("asserts/wheels/RodaVermelha.png", options);	
-
+	local rodaVerde = graphics.newImageSheet("asserts/wheels/RodaVerde.png", options);
+	local rodaVermelha = graphics.newImageSheet("asserts/wheels/RodaVermelha.png", options);
 
     local dadosSequencia = {
            {name="rodaAmarela", 	sheet=rodaAmarela, start=1, count=2, time=300, loopCount=0 },
@@ -29,18 +30,17 @@ wheel.new = function (bar)
            {name="rodavaziaVermelha", sheet=rodavaziaVermelha, start=1, count=1, time=300, loopCount=0 } 
 
 	}
-	local mywheel
 	
-	if bar.mytype == "AZUL" then
+	if bar.mytype == "BLUE" then
 		mywheel = display.newSprite(rodaAzul, dadosSequencia)
 	
-	elseif bar.mytype == "VERMELHO" then
+	elseif bar.mytype == "RED" then
 		mywheel = display.newSprite(rodaVermelha, dadosSequencia)
 	
-	elseif bar.mytype == "AMARELO" then
+	elseif bar.mytype == "YELLOW" then
 		mywheel = display.newSprite(rodaAmarela, dadosSequencia)
 	
-	elseif bar.mytype == "VERDE" then
+	elseif bar.mytype == "GREEN" then
 		mywheel = display.newSprite(rodaVerde, dadosSequencia)
 	end
 
@@ -58,13 +58,16 @@ wheel.new = function (bar)
 	end
 
 	mywheel.changeColor = function(color)
-		if color == "AZUL" then
-			mywheel:setSequence("rodaAzul")	
-		elseif color == "VERMELHO" then
+
+		print("here ??")
+
+		if color == "BLUE" then
+			mywheel:setSequence("rodaAzul")
+		elseif color == "RED" then
 			mywheel:setSequence("rodaVermelha")
-		elseif color == "AMARELO" then
+		elseif color == "YELLOW" then
 			mywheel:setSequence("rodaAmarela")
-		elseif color == "VERDE" then
+		elseif color == "GREEN" then
 			mywheel:setSequence("rodaVerde")
 		end
 
@@ -103,18 +106,16 @@ wheel.new = function (bar)
         		bar.timer = timer.performWithDelay( 1000, upBar, 0)
         	end
 
-        	--Runtime:removeEventListener("enterFrame", rat.moveLeft)
-        	rat.stopMove()
-
-        	rat:removeSelf()
-        	rat = nil
+        	--Runtime:removeEventListener("enterFrame", rat)
+        	--rat:removeSelf()
+        	--rat = nil
 
 	    elseif ( event.phase == "ended" ) then
 	        print("end")
 	    end
 	end
 
-	mywheel:addEventListener( "collision", onPostCollision )
+	mywheel:addEventListener("collision", onPostCollision)
 
 	return mywheel
 

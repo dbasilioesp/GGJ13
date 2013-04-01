@@ -48,7 +48,7 @@ pause.new = function(clock_timer)
 				pauseBtn.isVisible = false
 				resumeBtn.isVisible = true
 				pauseBanner.isVisible = true
-			
+				
 			else
 				
 				if shade then

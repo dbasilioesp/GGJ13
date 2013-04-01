@@ -1,10 +1,9 @@
-require "sprite"
-local physics = require "physics"
+
 local rat = require "rat"
 local container = require "container"
 local bar = require "bar"
 local wheel = require "wheel"
-local pause = require("pause")
+local pause = require "pause"
 
 system.activate( "multitouch" )
 physics.start()
@@ -15,7 +14,12 @@ physics.setGravity(0, 0)
 local scene1 = {}
 scene1.new = function()
 
-	local localGroup
+	local localGroup = display.newGroup()
+
+	--[[ 
+		DISPLAY ELEMENTS
+	--]]
+
 	local background
 	local bar_blue
 	local wheel_blue
@@ -28,16 +32,28 @@ scene1.new = function()
 	local container_yellow
 	local heart
 	local clock_label
-	local tempo
 	local shade
+
+	--[[
+		OTHERS
+	--]]
+
 	local musica
+	local channel
+	local tempo = 60
 
 	local initVars = function()
 
-		localGroup = display.newGroup()
-		
+		--[[
+			MUSICA
+		--]]
+
+		musica = audio.loadSound("asserts/sounds/musica1.ogg")
+		channel = audio.play(musica, {loops = -1})
+
 		local restartGame = function ()
-			director:changeScene("menu2")
+			audio.stop(channel)
+			director:changeScene("scene2")
 		end
 
 		local nextGameScreen = function()
@@ -48,6 +64,9 @@ scene1.new = function()
 			nextgame_image.y = display.contentHeight/2
 			nextgame_image:toFront()
 			timer.pause(clock_time)
+
+			localGroup:insert(newText)
+
 		end
 
 		local gameOverScreen = function()
@@ -63,11 +82,12 @@ scene1.new = function()
 
 			timer.pause(clock_time)
 			gameover_image:addEventListener("touch", restartGame)
+
+			localGroup:insert(gameover_image)
 		end
 
 		clock_label = display.newText("1:00", 450, 0, native.systemFont, 60)
-		tempo = 60
-
+		
 		local function decreaseTime()
 			if clock_label.text ~= "0:00" then
 				tempo = tempo - 1
@@ -80,9 +100,6 @@ scene1.new = function()
 		clock_time = timer.performWithDelay(1000, decreaseTime , 61)
 
 		pauseBtn = pause.new(clock_time)
-
-		musica = audio.loadSound("asserts/sounds/musica1.ogg")
-		local m = audio.play(musica, {loops = -1})
 
 		shade = display.newRect( 0, 0, display.contentWidth, display.contentHeight )
 		shade:setFillColor( 0, 0, 0, 255 )
@@ -230,13 +247,6 @@ scene1.new = function()
 			new_rat.x = math.random(420,600)
 			new_rat.y = math.random(700,950)
 
-			local function moveUp (event)
-				new_rat.y = new_rat.y - 5
-				if new_rat.y < 0 - new_rat.height/2 then
-					Runtime:removeEventListener("enterFrame", moveUp)
-				end
-			end
-
 			new_rat:play()
 
 			localGroup:insert(new_rat)
@@ -263,13 +273,13 @@ scene1.new = function()
 		localGroup:insert(heart.image)
 		localGroup:insert(shade)
 		localGroup:insert(clock_label)
-
 		
 		goRat()
 
     end
 
     initVars()
+
 
 	return localGroup
 end
