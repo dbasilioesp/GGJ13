@@ -15,9 +15,8 @@ wheel.new = function (bar)
 
 	local rodaAmarela = graphics.newImageSheet("asserts/wheels/RodaAmarela.png", options);
 	local rodaAzul = graphics.newImageSheet("asserts/wheels/RodaAzul.png", options);
-	local rodaVerde = graphics.newImageSheet("asserts/wheels/RodaVerde.png", options);	
-	local rodaVermelha = graphics.newImageSheet("asserts/wheels/RodaVermelha.png", options);	
-
+	local rodaVerde = graphics.newImageSheet("asserts/wheels/RodaVerde.png", options);
+	local rodaVermelha = graphics.newImageSheet("asserts/wheels/RodaVermelha.png", options);
 
     local dadosSequencia = {
            {name="rodaAmarela", 	sheet=rodaAmarela, start=1, count=2, time=300, loopCount=0 },
@@ -108,8 +107,8 @@ wheel.new = function (bar)
         	end
 
         	--Runtime:removeEventListener("enterFrame", rat)
-        	rat.removeSelf()
-        	rat = nil
+        	--rat:removeSelf()
+        	--rat = nil
 
 	    elseif ( event.phase == "ended" ) then
 	        print("end")

@@ -1,5 +1,5 @@
 module( ..., package.seeall )
-local rat = require "rat3"
+local rat = require "rat4"
 local scene3 = {}
 
 scene3.new = function ()
@@ -9,7 +9,7 @@ scene3.new = function ()
 	local label = display.newText("Welcome Scene 3", 100, 100, nil, 30)
 
 	local myrat = rat.new("YELLOW", "LEFT")
-
+	
 	return localGroup
 
 end

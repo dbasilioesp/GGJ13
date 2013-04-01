@@ -203,8 +203,6 @@ _rat.new = function( direcao, cor)
                                 rat:setSequence(ratoHorizontalEsquerda)
                                 rat:play()
                                 Runtime:addEventListener("enterFrame" , rat.moveLeft)
-
-
                         else
                                 rat.direcao_rato = 4
                                 rat:setSequence(ratoHorizontal)
